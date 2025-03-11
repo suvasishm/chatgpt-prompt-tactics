@@ -158,9 +158,9 @@ you have done the problem yourself.
 
 Use the following format:
 Question:
-\\```
+\`\`\`
 question here
-\\```
+\`\`\`
 Student's solution:
 \\```
 student's solution here
