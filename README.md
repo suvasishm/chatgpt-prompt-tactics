@@ -5,6 +5,12 @@ This document provides examples of effective prompting techniques when using the
 ## Setup
 Before running any of the examples, ensure you have installed the `openai` package and set up your API key:
 
+1. python3 -m venv llmlearn
+2. source llmlearn/bin/activate
+3. pip install openai
+4. export OPENAI_API_KEY=sk-..
+
+
 ```python
 from openai import OpenAI
 
@@ -51,8 +57,8 @@ print(get_completion(prompt))
 ```python
 prompt = f"""
 Generate a list of three made-up book titles along \
-with their authors and genres.
-Provide them in JSON format with the following keys:
+with their authors and genres. 
+Provide them in JSON format with the following keys: 
 book_id, title, author, genre.
 """
 print("Completion for Tactic 2:")
@@ -74,7 +80,7 @@ And that's it! You've got yourself a delicious \
 cup of tea to enjoy.
 """
 prompt = f"""
-You will be provided with text delimited by triple quotes.
+You will be provided with text delimited by triple quotes. 
 If it contains a sequence of instructions, \
 re-write those instructions in the following format:
 
@@ -111,3 +117,81 @@ print("Completion for Tactic 4:")
 print(get_completion(prompt))
 ```
 
+## Tactic 5: Specify the Steps Required to Complete a Task
+
+```python
+text = f"""
+In a charming village, siblings Jack and Jill set out on \
+a quest to fetch water from a hilltop \
+well. As they climbed, singing joyfully, misfortune \
+struck—Jack tripped on a stone and tumbled \
+down the hill, with Jill following suit. \
+Though slightly battered, the pair returned home to \
+comforting embraces. Despite the mishap, \
+their adventurous spirits remained undimmed, and they \
+continued exploring with delight.
+"""
+```
+
+### Example 1
+```python
+prompt = f"""
+Perform the following actions: 
+1 - Summarize the following text delimited by triple \
+backticks with 1 sentence.
+2 - Translate the summary into French.
+3 - List each name in the French summary.
+4 - Output a json object that contains the following \
+keys: french_summary, num_names.
+
+Separate your answers with line breaks.
+
+Text:
+```{text}```
+"""
+print("Completion for Tactic 5/1:")
+print(get_completion(prompt))
+```
+
+### Example 2
+```python
+prompt = f"""
+Your task is to perform the following actions: 
+1 - Summarize the following text delimited by 
+  <> with 1 sentence.
+2 - Translate the summary into French.
+3 - List each name in the French summary.
+4 - Output a json object that contains the 
+  following keys: french_summary, num_names.
+
+Use the following format:
+Text: <text to summarize>
+Summary: <summary>
+Translation: <summary translation>
+Names: <list of names in summary>
+Output JSON: <json with summary and num_names>
+
+Text: <{text}>
+"""
+print("Completion for Tactic 5/2:")
+print(get_completion(prompt))
+```
+
+## Tactic 6: Instruct the Model to Work Out Its Own Solution Before Rushing to a Conclusion
+
+```python
+prompt = f"""
+Your task is to determine if the student's solution \
+is correct or not.
+To solve the problem do the following:
+- First, work out your own solution to the problem including the final total. 
+- Then compare your solution to the student's solution \
+and evaluate if the student's solution is correct or not. 
+Don't decide if the student's solution is correct until 
+you have done the problem yourself.
+
+... (continued prompt)
+"""
+print("Completion for Tactic 6:")
+print(get_completion(prompt))
+```
