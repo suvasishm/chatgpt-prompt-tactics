@@ -1,1 +1,1 @@
-Documenting some effecting prompting tactics for different use cases.
+Documenting some effective prompting tactics for different use cases.
