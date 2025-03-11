@@ -240,3 +240,6 @@ print("Completion for Tactic 6:")
 print(get_completion(prompt))
 
 ```
+
+Ref:
+- https://learn.deeplearning.ai/courses/chatgpt-prompt-eng/lesson/zi9lz/guidelines
