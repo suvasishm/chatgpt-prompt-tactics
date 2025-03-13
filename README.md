@@ -30,7 +30,7 @@ export OPENAI_API_KEY=<sk-..>
 python GeneralGuidelines.py
 ```
 
-### Run GeneralGuidelines
+### Run USAddressValidator
 ```shell
 python USAddressValidator.py
 ```
