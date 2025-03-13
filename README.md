@@ -31,6 +31,9 @@ python GeneralGuidelines.py
 ```
 
 ### Run USAddressValidator
+
+Update the address specified in `prompt`
+
 ```shell
 python USAddressValidator.py
 ```
