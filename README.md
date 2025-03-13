@@ -22,7 +22,7 @@ pip install ipykernel
 python -m ipykernel install --user --name=llmlearn --display-name "Python (llmlearn)"
 ```
 
-Launch from 
+Launch notebook 
 ```shell
 jupyter-notebook
 ```
