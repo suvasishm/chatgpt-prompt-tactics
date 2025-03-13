@@ -2,17 +2,7 @@ from openai import OpenAI
 
 client = OpenAI()
 
-
-#def get_completion(prompt, model="gpt-4o"):
-#    messages = [{"role": "user", "content": prompt}]
-#    response = client.chat.completions.create(  # Corrected API method
-#        model=model,
-#        messages=messages,
-#        temperature=0,  # This is the degree of randomness of the model's output
-#    )
-#    return response.choices[0].message.content  # Corrected attribute access
-
-def get_completion(prompt, model="gpt-4o"):
+def get_response(prompt, model="gpt-4o"):
     response = client.responses.create(
         model=model,
         instructions='You are an assistant',  # 'instructions' instead of 'messages'
@@ -40,7 +30,7 @@ into a single sentence.
 ```{text}```
 """
 print("Completion for Tactic 1:")
-print(get_completion(prompt))
+print(get_response(prompt))
 
 # Tactic 2: Ask for a structured output
 prompt = f"""
@@ -50,7 +40,7 @@ Provide them in JSON format with the following keys:
 book_id, title, author, genre.
 """
 print("Completion for Tactic 2:")
-print(get_completion(prompt))
+print(get_response(prompt))
 
 # Tactic 3: Ask the model to check whether conditions are satisfied
 text_1 = f"""
@@ -80,7 +70,7 @@ then simply write \"No steps provided.\"
 \"\"\"{text_1}\"\"\"
 """
 print("Completion for Tactic 3:")
-print(get_completion(prompt))
+print(get_response(prompt))
 
 # Tactic 4: "Few-shot" prompting
 prompt = f"""
@@ -96,7 +86,7 @@ the most intricate tapestry begins with a solitary thread.
 <child>: Teach me about resilience.
 """
 print("Completion for Tactic 4:")
-print(get_completion(prompt))
+print(get_response(prompt))
 
 # Tactic 5: Specify the steps required to complete a task
 text = f"""
@@ -126,7 +116,7 @@ Text:
 ```{text}```
 """
 print("Completion for Tactic 5/1:")
-print(get_completion(prompt))
+print(get_response(prompt))
 
 ## example 2
 prompt = f"""
@@ -148,7 +138,7 @@ Output JSON: <json with summary and num_names>
 Text: <{text}>
 """
 print("Completion for Tactic 5/2:")
-print(get_completion(prompt))
+print(get_response(prompt))
 
 ## Tactic 6: Instruct the Model to Work Out Its Own Solution Before Rushing to a Conclusion
 
@@ -209,6 +199,6 @@ Total cost: 100x + 250x + 100,000 + 100x = 450x + 100,000
 Actual solution:
 """
 print("Completion for Tactic 6:")
-print(get_completion(prompt))
+print(get_response(prompt))
 
 

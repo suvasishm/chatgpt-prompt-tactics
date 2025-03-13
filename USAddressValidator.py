@@ -21,7 +21,7 @@ instructions = f"""
 """
 
 
-def get_completion(prompt, model="gpt-4o"):
+def get_response(prompt, model="gpt-4o"):
     response = client.responses.create(
         model=model,
         instructions=instructions,  # 'instructions' instead of 'messages'
@@ -36,7 +36,7 @@ prompt = f"""
 555 N Michigan Ave, CHICAGO, IL 60611.
 """
 print("Address validation result:")
-print(get_completion(prompt))
+print(get_response(prompt))
 
 
 
