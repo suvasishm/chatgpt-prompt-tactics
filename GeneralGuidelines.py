@@ -2,17 +2,24 @@ from openai import OpenAI
 
 client = OpenAI()
 
-def get_completion(prompt, model="gpt-4o"):
-    messages = [{"role": "user", "content": prompt}]
-    
-    response = client.chat.completions.create(  # Corrected API method
-        model=model,
-        messages=messages,
-        temperature=0,  # This is the degree of randomness of the model's output
-    )
-    
-    return response.choices[0].message.content  # Corrected attribute access
 
+#def get_completion(prompt, model="gpt-4o"):
+#    messages = [{"role": "user", "content": prompt}]
+#    response = client.chat.completions.create(  # Corrected API method
+#        model=model,
+#        messages=messages,
+#        temperature=0,  # This is the degree of randomness of the model's output
+#    )
+#    return response.choices[0].message.content  # Corrected attribute access
+
+def get_completion(prompt, model="gpt-4o"):
+    response = client.responses.create(
+        model=model,
+        instructions='You are an assistant',  # 'instructions' instead of 'messages'
+        input=prompt,
+    )
+
+    return response.output_text  # Corrected attribute access
 
 # Tactic 1: Use delimiters to clearly indicate distinct parts of the input
 text = f"""
