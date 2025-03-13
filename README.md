@@ -7,23 +7,27 @@ Before running any of the examples, ensure you have installed the `openai` packa
 
 ```shell
 python3 -m venv llmlearn
-```
-
-```shell
 source llmlearn/bin/activate
-```
-
-```shell
 pip install openai
-```
-
-```shell
 python3 -m pip install --upgrade pip
 ```
 
 ```shell
 export OPENAI_API_KEY=<sk-..>
 ```
+
+## Option 1: To Use the Virtual Environment Inside Jupyter
+```shell
+pip install ipykernel
+python -m ipykernel install --user --name=llmlearn --display-name "Python (llmlearn)"
+```
+
+Launch from 
+```shell
+jupyter-notebook
+```
+
+## Option 2: To run the individual python file
 
 ### Run GeneralGuidelines
 ```shell
