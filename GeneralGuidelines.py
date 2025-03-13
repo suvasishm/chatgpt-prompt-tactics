@@ -1,17 +1,3 @@
-# OpenAI Prompting Tactics
-
-This document provides examples of effective prompting techniques when using the OpenAI API. Each tactic is demonstrated with an executable Python code block.
-
-## Setup
-Before running any of the examples, ensure you have installed the `openai` package and set up your API key:
-
-1. python3 -m venv llmlearn
-2. source llmlearn/bin/activate
-3. pip install openai
-4. export OPENAI_API_KEY=sk-..
-
-
-```python
 from openai import OpenAI
 
 client = OpenAI()
@@ -19,18 +5,16 @@ client = OpenAI()
 def get_completion(prompt, model="gpt-4o"):
     messages = [{"role": "user", "content": prompt}]
     
-    response = client.chat.completions.create(
+    response = client.chat.completions.create(  # Corrected API method
         model=model,
         messages=messages,
         temperature=0,  # This is the degree of randomness of the model's output
     )
     
     return response.choices[0].message.content  # Corrected attribute access
-```
 
-## Tactic 1: Use Delimiters to Clearly Indicate Distinct Parts of the Input
 
-```python
+# Tactic 1: Use delimiters to clearly indicate distinct parts of the input
 text = f"""
 You should express what you want a model to do by \
 providing instructions that are as clear and \
@@ -50,11 +34,8 @@ into a single sentence.
 """
 print("Completion for Tactic 1:")
 print(get_completion(prompt))
-```
 
-## Tactic 2: Ask for a Structured Output
-
-```python
+# Tactic 2: Ask for a structured output
 prompt = f"""
 Generate a list of three made-up book titles along \
 with their authors and genres. 
@@ -63,11 +44,8 @@ book_id, title, author, genre.
 """
 print("Completion for Tactic 2:")
 print(get_completion(prompt))
-```
 
-## Tactic 3: Ask the Model to Check Whether Conditions are Satisfied
-
-```python
+# Tactic 3: Ask the model to check whether conditions are satisfied
 text_1 = f"""
 Making a cup of tea is easy! First, you need to get some \
 water boiling. While that's happening, \
@@ -92,15 +70,12 @@ Step N - …
 If the text does not contain a sequence of instructions, \
 then simply write \"No steps provided.\"
 
-"""{text_1}"""
+\"\"\"{text_1}\"\"\"
 """
 print("Completion for Tactic 3:")
 print(get_completion(prompt))
-```
 
-## Tactic 4: "Few-Shot" Prompting
-
-```python
+# Tactic 4: "Few-shot" prompting
 prompt = f"""
 Your task is to answer in a consistent style.
 
@@ -115,11 +90,8 @@ the most intricate tapestry begins with a solitary thread.
 """
 print("Completion for Tactic 4:")
 print(get_completion(prompt))
-```
 
-## Tactic 5: Specify the Steps Required to Complete a Task
-
-```python
+# Tactic 5: Specify the steps required to complete a task
 text = f"""
 In a charming village, siblings Jack and Jill set out on \
 a quest to fetch water from a hilltop \
@@ -131,10 +103,7 @@ comforting embraces. Despite the mishap, \
 their adventurous spirits remained undimmed, and they \
 continued exploring with delight.
 """
-```
-
-### Example 1
-```python
+## example 1
 prompt = f"""
 Perform the following actions: 
 1 - Summarize the following text delimited by triple \
@@ -151,10 +120,8 @@ Text:
 """
 print("Completion for Tactic 5/1:")
 print(get_completion(prompt))
-```
 
-### Example 2
-```python
+## example 2
 prompt = f"""
 Your task is to perform the following actions: 
 1 - Summarize the following text delimited by 
@@ -175,71 +142,66 @@ Text: <{text}>
 """
 print("Completion for Tactic 5/2:")
 print(get_completion(prompt))
-```
 
-# Tactic 6: Instruct the Model to Work Out Its Own Solution Before Rushing to a Conclusion
+## Tactic 6: Instruct the Model to Work Out Its Own Solution Before Rushing to a Conclusion
 
-```python
 prompt = f"""
-Your task is to determine if the student's solution \\
+Your task is to determine if the student's solution \
 is correct or not.
 To solve the problem do the following:
 - First, work out your own solution to the problem including the final total. 
-- Then compare your solution to the student's solution \\
+- Then compare your solution to the student's solution \
 and evaluate if the student's solution is correct or not. 
 Don't decide if the student's solution is correct until 
 you have done the problem yourself.
 
 Use the following format:
 Question:
-\```
+```
 question here
-\```
+```
 Student's solution:
-\```
+```
 student's solution here
-\```
+```
 Actual solution:
-\```
+```
 steps to work out the solution and your solution here
-\```
-Is the student's solution the same as actual solution \\
+```
+Is the student's solution the same as actual solution \
 just calculated:
-\```
+```
 yes or no
-\```
+```
 Student grade:
-\```
+```
 correct or incorrect
-\```
+```
 
 Question:
-\```
-I'm building a solar power installation and I need help \\
+```
+I'm building a solar power installation and I need help \
 working out the financials. 
 - Land costs $100 / square foot
 - I can buy solar panels for $250 / square foot
-- I negotiated a contract for maintenance that will cost \\
-me a flat $100k per year, and an additional $10 / square \\
+- I negotiated a contract for maintenance that will cost \
+me a flat $100k per year, and an additional $10 / square \
 foot
-What is the total cost for the first year of operations \\
+What is the total cost for the first year of operations \
 as a function of the number of square feet.
-\```
+``` 
 Student's solution:
-\```
+```
 Let x be the size of the installation in square feet.
 Costs:
 1. Land cost: 100x
 2. Solar panel cost: 250x
 3. Maintenance cost: 100,000 + 100x
 Total cost: 100x + 250x + 100,000 + 100x = 450x + 100,000
-\```
+```
 Actual solution:
 """
 print("Completion for Tactic 6:")
 print(get_completion(prompt))
 
-```
 
-Ref:
-- https://learn.deeplearning.ai/courses/chatgpt-prompt-eng/lesson/zi9lz/guidelines
