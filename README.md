@@ -32,7 +32,7 @@ python GeneralGuidelines.py
 
 ### Run USAddressValidator
 
-Update the address specified in `prompt`
+Update the address specified in `prompt` within the file
 
 ```shell
 python USAddressValidator.py
